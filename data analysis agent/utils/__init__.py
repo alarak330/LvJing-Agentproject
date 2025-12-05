@@ -4,7 +4,7 @@
 提供面向中国法律的数据驱动类案分析所需的各种工具函数。
 """
 
-from .exceptions import (
+from .expand_exceptions import (
     LegalDataError,
     CaseParseError,
     DataValidationError,

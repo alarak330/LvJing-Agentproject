@@ -12,12 +12,14 @@ from typing import Dict, List, Optional
 
 from loguru import logger
 from .constants import (
+    COURT_LEVELS,
+    MONTH_MAP,
+    YEAR_AND_DAY_MAP,
+    DATE_FORMATS,
     CASE_NUMBER_PATTERNS,
     LAW_REFERENCE_PATTERNS,
-    DATE_FORMATS,
-    COURT_LEVELS,
 )
-from .exceptions import CaseParseError
+from .expand_exceptions import CaseParseError
 
 
 def parse_case_number(case_number: str) -> Dict[str, str]:
@@ -131,25 +133,38 @@ def parse_law_reference(text: str) -> List[Dict[str, str]]:
     return references
 
 
-def parse_date(date_str: str) -> Optional[datetime]:
+def parse_date(text: str) -> Optional[str]:
     """
     解析法律日期格式。
     
-    支持多种日期格式: 2023-01-01, 2023年01月01日, 2023/01/01
-    
-    :param date_str: 日期字符串
+    由于裁判文书是以中文数字的形式展现日期，所以使用了中文日期时间
+    例如
+    :param text: 包含日期的文本
     :return: datetime对象，如果无法解析则返回None
     """
-    logger.debug(f"parse_date called with date_str={date_str}")
-    for fmt in DATE_FORMATS:
-        try:
-            parsed = datetime.strptime(date_str, fmt)
-            logger.debug(f"parse_date parsed using format={fmt}: {parsed}")
-            return parsed
-        except ValueError:
-            continue
-    logger.debug("parse_date failed to parse date_str")
-    return None
+    logger.debug("解析文本中的日期")
+
+    datestr = re.search(DATE_FORMATS, text).group()
+    logger.debug(f"原日期时间：{datestr}")
+    if datestr:
+        yearpattern = re.search(r"[\u4e00-\u9fa5]+〇?[\u4e00-\u9fa5]+年", datestr).group()
+        logger.debug(yearpattern)
+        year_digit = ''
+        for char in yearpattern:
+            year_digit += YEAR_AND_DAY_MAP[char]
+
+        monthpattern = re.search("年[\u4e00-\u9fa5]+月",datestr).group()
+        month_digit = MONTH_MAP[monthpattern[1:len(monthpattern)-1]]
+
+
+        daypattern = re.search(r"月[\u4e00-\u9fa5]+日",datestr).group()
+        day_digit = YEAR_AND_DAY_MAP[daypattern[1:len(daypattern)-1]]
+        fmt_datetime = f"{year_digit}-{month_digit}-{day_digit}"
+
+        return fmt_datetime
+    else:
+        logger.debug("parse_date failed to parse date_str")
+        return None
 
 
 def extract_dispute_focus(text: str) -> List[str]:
