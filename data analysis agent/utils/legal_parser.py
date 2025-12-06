@@ -7,7 +7,6 @@
 from __future__ import annotations
 
 import re
-from datetime import datetime
 from typing import Dict, List, Optional
 
 from loguru import logger
@@ -99,8 +98,13 @@ def parse_court_name(court_name: str) -> Dict[str, str]:
     match = re.search(region_pattern, court_name)
     if match:
         result["region"] = match.group(1)
-        logger.debug(match)
     return result
+
+
+def parse_plaintiff_defendant(text: str) -> Dict[str, str]:
+    # TODO: 解析申请人和被申请人（原告，被告）的功能，
+    #       暂时交给llm解决，如果分辨的不好再上手做这个工具
+    pass
 
 
 def parse_law_reference(text: str) -> List[Dict[str, str]]:
@@ -140,7 +144,7 @@ def parse_date(text: str) -> Optional[str]:
     由于裁判文书是以中文数字的形式展现日期，所以使用了中文日期时间
     例如
     :param text: 包含日期的文本
-    :return: datetime对象，如果无法解析则返回None
+    :return: str，如果无法解析则返回None
     """
     logger.debug("解析文本中的日期")
 
@@ -153,76 +157,16 @@ def parse_date(text: str) -> Optional[str]:
         for char in yearpattern:
             year_digit += YEAR_AND_DAY_MAP[char]
 
-        monthpattern = re.search("年[\u4e00-\u9fa5]+月",datestr).group()
-        month_digit = MONTH_MAP[monthpattern[1:len(monthpattern)-1]]
+        monthpattern = re.search("年[\u4e00-\u9fa5]+月", datestr).group()
+        month_digit = MONTH_MAP[monthpattern[1:len(monthpattern) - 1]]
 
-
-        daypattern = re.search(r"月[\u4e00-\u9fa5]+日",datestr).group()
-        day_digit = YEAR_AND_DAY_MAP[daypattern[1:len(daypattern)-1]]
+        daypattern = re.search(r"月[\u4e00-\u9fa5]+日", datestr).group()
+        day_digit = YEAR_AND_DAY_MAP[daypattern[1:len(daypattern) - 1]]
         fmt_datetime = f"{year_digit}-{month_digit}-{day_digit}"
 
         return fmt_datetime
     else:
-        logger.debug("parse_date failed to parse date_str")
+        logger.info("parse_date failed to parse date_str")
         return None
 
-
-def extract_dispute_focus(text: str) -> List[str]:
-    """
-    提取争议焦点。
-    
-    :param text: 包含争议焦点的文本
-    :return: 争议焦点列表
-    
-    example:
-        >>> extract_dispute_focus("争议焦点：1.合同是否有效 2.违约责任")
-        ["合同是否有效", "违约责任"]
-    """
-    focus_list = []
-
-    # 匹配"争议焦点"后的内容
-    pattern = r"争议焦点[：:]\s*(.+?)(?=\n|$)"
-    match = re.search(pattern, text, re.DOTALL)
-
-    if match:
-        content = match.group(1)
-        # 提取编号列表项
-        items = re.findall(r"[0-9一二三四五六七八九十]+[.、]\s*([^0-9一二三四五六七八九十]+)", content)
-        focus_list.extend([item.strip() for item in items])
-    return focus_list
-
-
-def extract_judgment_result(text: str) -> Dict[str, any]:
-    """
-    提取判决结果。
-    
-    :param text: 包含判决结果的文本
-    :return: 包含判决类型、金额、支持/驳回等信息的字典
-    """
-    logger.debug("extract_judgment_result called")
-    result = {
-        "judgment_type": '?',  # 支持/驳回/部分支持等
-        "amount": -1.0,  # 金额
-    }
-
-    # 匹配判决类型
-    if "支持" in text and "驳回" not in text:
-        result["judgment_type"] = "支持"
-    elif "驳回" in text and "支持" not in text:
-        result["judgment_type"] = "驳回"
-    elif "部分支持" in text:
-        result["judgment_type"] = "部分支持"
-
-    # 提取金额（简单匹配，实际可能需要更复杂的处理）
-    amount_pattern = r"([0-9,，]+\.?\d*)\s*元"
-    match = re.search(amount_pattern, text)
-    if match:
-        amount_str: str = match.group(1).replace(",", "").replace("，", "")
-        try:
-            result["amount"] = float(amount_str)
-        except ValueError:
-            pass
-
-    logger.debug(f"extract_judgment_result result: {result}")
-    return result
 

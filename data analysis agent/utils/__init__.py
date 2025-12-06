@@ -28,8 +28,6 @@ from .legal_parser import (
     parse_court_name,
     parse_law_reference,
     parse_date,
-    extract_dispute_focus,
-    extract_judgment_result,
 )
 
 # 统计分析工具
@@ -73,8 +71,6 @@ __all__ = [
     "parse_court_name",
     "parse_law_reference",
     "parse_date",
-    "extract_dispute_focus",
-    "extract_judgment_result",
     # 统计分析
     "calculate_trend",
     "calculate_distribution",
