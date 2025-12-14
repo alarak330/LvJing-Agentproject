@@ -101,12 +101,6 @@ def parse_court_name(court_name: str) -> Dict[str, str]:
     return result
 
 
-def parse_plaintiff_defendant(text: str) -> Dict[str, str]:
-    # TODO: 解析申请人和被申请人（原告，被告）的功能，
-    #       暂时交给llm解决，如果分辨的不好再上手做这个工具
-    pass
-
-
 def parse_law_reference(text: str) -> List[Dict[str, str]]:
     """
     提取文本中的法条引用。
@@ -142,9 +136,11 @@ def parse_date(text: str) -> Optional[str]:
     解析法律日期格式。
     
     由于裁判文书是以中文数字的形式展现日期，所以使用了中文日期时间
-    例如
     :param text: 包含日期的文本
     :return: str，如果无法解析则返回None
+    example:
+        >>> parse_date("二〇二五年十一月二十七日")
+        2025-11-27
     """
     logger.debug("解析文本中的日期")
 
