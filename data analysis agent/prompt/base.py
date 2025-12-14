@@ -140,5 +140,4 @@ def create_prompt_template(
         name=name,
         examples=examples or []
     )
-    logger.debug(f"创建提示词模板: {name or 'unnamed'}")
     return prompt

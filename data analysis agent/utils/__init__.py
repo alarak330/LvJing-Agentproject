@@ -30,15 +30,6 @@ from .legal_parser import (
     parse_date,
 )
 
-# 统计分析工具
-from .statistics_analyzer import (
-    calculate_trend,
-    calculate_distribution,
-    calculate_win_rate,
-    calculate_average_amount,
-    group_by_dimension,
-)
-
 # 数据格式化工具
 from .formatter import (
     format_case_summary,
