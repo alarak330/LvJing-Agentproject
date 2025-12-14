@@ -142,5 +142,3 @@ def create_prompt_template(
     )
     logger.debug(f"创建提示词模板: {name or 'unnamed'}")
     return prompt
-
-create_prompt_template('hello world','lvjing')
