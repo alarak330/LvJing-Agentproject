@@ -6,7 +6,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 import json
 import os
 import subprocess
@@ -25,40 +25,17 @@ from prompt import (
 
 
 # 数据格式化工具
-from utils.formatter import (
-    format_case_summary,
-    format_statistics,
-    format_table_data,
-    format_chart_data,
-)
 
 # 异常类
 from utils.expand_exceptions import (
     LegalDataError,
-    DataValidationError,
-    StatisticsError,
 )
 
 # 数据库模块
 from database import (
-    DatabaseConnection,
     DatabaseConfig,
-    SchemaInspector,
-    get_db_context,
 )
 
-from utils.legal_parser import (
-    parse_case_number,
-    parse_court_name,
-    parse_law_reference,
-    parse_date,
-)
-
-from utils.constants import (
-    CASE_TYPES,
-    COURT_LEVELS,
-    PROCEDURE_TYPES,
-)
 
 class DataAnalysisAgent:
     """

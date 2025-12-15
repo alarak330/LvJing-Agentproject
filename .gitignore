@@ -1,0 +1,6 @@
+HELLOWORLD.py
+.idea/
+__pycache__/
+*.pyc
+data analysis agent/MODULE_PLAN.md
+.env
