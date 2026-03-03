@@ -1,0 +1,226 @@
+2026-02-03 23:37:10 | INFO     | __main__:<module>:226 | 日志已配置，日志文件保存在: D:\University\Computer Program\lvjing\log
+2026-02-03 23:37:11 | INFO     | __main__:__init__:249 | GUI应用初始化完成
+2026-02-03 23:37:58 | INFO     | __main__:_update_progress:602 | 正在初始化智能体...
+2026-02-03 23:37:58 | INFO     | __main__:_update_progress:602 | 正在初始化论坛智能体...
+2026-02-03 23:37:58 | INFO     | forum.agent:__init__:145 | 初始化论坛智能体
+2026-02-03 23:37:59 | INFO     | data_analysis_agent.data_analysis_agent:__init__:60 | 初始化数据分析智能体
+2026-02-03 23:37:59 | DEBUG    | database.connection:from_env:58 |  
+ MYSQL_HOST: localhost
+ MYSQL_USER: root
+ MYSQL_PASSWORD: wfl060330
+ MYSQL_DATABASE: sqlprac
+2026-02-03 23:37:59 | INFO     | data_analysis_agent.data_analysis_agent:__init__:83 | 数据分析智能体初始化完成
+2026-02-03 23:37:59 | INFO     | data_mining_agent.data_mining_agent:__init__:44 | 初始化数据挖掘智能体
+2026-02-03 23:37:59 | INFO     | data_mining_agent.data_mining_agent:__init__:55 | 数据挖掘智能体初始化完成
+2026-02-03 23:37:59 | INFO     | forum.agent:__init__:169 | 论坛智能体初始化完成
+2026-02-03 23:37:59 | INFO     | __main__:_update_progress:602 | 正在初始化报告智能体...
+2026-02-03 23:37:59 | INFO     | report_agent.agent:__init__:53 | 初始化报告智能体
+2026-02-03 23:37:59 | INFO     | report_agent.agent:__init__:64 | 报告智能体初始化完成
+2026-02-03 23:37:59 | INFO     | __main__:_update_progress:602 | 正在进行智能体辩论（这可能需要几分钟）...
+2026-02-03 23:37:59 | INFO     | forum.agent:conduct_debate:188 | 开始论坛辩论，用户需求: 构成的罪名和缘由是什么啊？我把案件给你
+
+一、基本案情
+
+被告人李某，男，32岁，某快递公司货车司机...
+2026-02-03 23:37:59 | INFO     | forum.agent:conduct_debate:204 | 开始第 1 轮辩论
+2026-02-03 23:37:59 | INFO     | forum.agent:conduct_debate:209 | 引导数据分析智能体分析需求
+2026-02-03 23:37:59 | INFO     | data_analysis_agent.data_analysis_agent:NL_parse_requirement:95 | 开始解析用户需求: 构成的罪名和缘由是什么啊？我把案件给你
+
+一、基本案情
+
+被告人李某，男，32岁，某快递公司货车司机...
+2026-02-03 23:37:59 | DEBUG    | data_analysis_agent.data_analysis_agent:_get_available_fields:371 | 使用模拟字段列表
+2026-02-03 23:37:59 | DEBUG    | data_analysis_agent.prompt.base:to_messages:95 | 添加系统消息: 角色已定义
+2026-02-03 23:37:59 | DEBUG    | data_analysis_agent.prompt.base:to_messages:102 | 添加 2 个 Few-shot 示例
+2026-02-03 23:37:59 | DEBUG    | data_analysis_agent.prompt.base:format:40 | 格式化提示词模板 'nl_requirement_parse': 替换了 2 个变量
+2026-02-03 23:37:59 | DEBUG    | data_analysis_agent.prompt.base:to_messages:113 | 添加用户消息: 提示词已格式化
+2026-02-03 23:37:59 | DEBUG    | data_analysis_agent.prompt.base:to_messages:118 | 成功将提示词模板转换为 6 条消息
+2026-02-03 23:37:59 | DEBUG    | data_analysis_agent.data_analysis_agent:NL_parse_requirement:107 | 调用 LLM 进行需求解析
+2026-02-03 23:38:07 | DEBUG    | data_analysis_agent.data_analysis_agent:_extract_json_from_response:427 | 从文本中提取 JSON 对象: {
+    "case_types": ["刑事"],
+    "time_range": {
+        "start": null,
+        "end": null
+    },
+  ...
+2026-02-03 23:38:07 | INFO     | data_analysis_agent.data_analysis_agent:NL_parse_requirement:115 | ✅ 需求解析成功完成
+2026-02-03 23:38:07 | DEBUG    | data_analysis_agent.data_analysis_agent:NL_parse_requirement:116 | 需求解析完成: {'case_types': ['刑事'], 'time_range': {'start': None, 'end': None}, 'regions': [], 'court_levels': [], 'procedure_types': [], 'analysis_goal': '罪名与缘由分析', 'other_filters': {'potential_charges': ['以危险方法危害公共安全罪', '交通肇事罪', '过失致人死亡罪'], 'key_factors': ['醉驾', '准驾不符', '超载', '夜间复杂路段驾驶', '事故后逃逸', '被害人死亡', '被害人过错']}}
+2026-02-03 23:38:07 | INFO     | forum.agent:conduct_debate:204 | 开始第 2 轮辩论
+2026-02-03 23:38:07 | INFO     | forum.agent:conduct_debate:221 | 引导数据挖掘智能体搜索数据
+2026-02-03 23:38:07 | INFO     | data_mining_agent.data_mining_agent:search_laws_by_prompt:88 | 开始搜索法律条文，查询: 法律条文搜索...
+2026-02-03 23:38:07 | DEBUG    | data_mining_agent.prompts.base:to_messages:95 | 添加系统消息: 角色已定义
+2026-02-03 23:38:07 | DEBUG    | data_mining_agent.prompts.base:to_messages:102 | 添加 2 个 Few-shot 示例
+2026-02-03 23:38:07 | DEBUG    | data_mining_agent.prompts.base:format:40 | 格式化提示词模板 'law_search': 替换了 1 个变量
+2026-02-03 23:38:07 | DEBUG    | data_mining_agent.prompts.base:to_messages:113 | 添加用户消息: 提示词已格式化
+2026-02-03 23:38:07 | DEBUG    | data_mining_agent.prompts.base:to_messages:118 | 成功将提示词模板转换为 6 条消息
+2026-02-03 23:38:07 | DEBUG    | data_mining_agent.data_mining_agent:search_laws_by_prompt:100 | 调用 LLM 进行法律条文搜索
+2026-02-03 23:38:11 | DEBUG    | data_mining_agent.data_mining_agent:search_laws_by_prompt:104 | LLM 响应长度: 173 字符
+2026-02-03 23:38:11 | DEBUG    | data_mining_agent.data_mining_agent:_extract_json_from_response:257 | 从文本中提取 JSON 对象: {
+    "laws": [],
+    "total_count": 0,
+    "search_summary": "查询提示词'法律条文搜索'本身是一个元指令，用于说明搜索功能，而非一个具体...
+2026-02-03 23:38:11 | INFO     | data_mining_agent.data_mining_agent:search_laws_by_prompt:120 | ✅ 法律条文搜索完成，找到 0 条相关条文
+2026-02-03 23:38:11 | INFO     | data_mining_agent.data_mining_agent:summarize_found_data:169 | 开始生成数据概括性信息
+2026-02-03 23:38:11 | DEBUG    | data_mining_agent.prompts.base:to_messages:95 | 添加系统消息: 角色已定义
+2026-02-03 23:38:11 | DEBUG    | data_mining_agent.prompts.base:to_messages:102 | 添加 1 个 Few-shot 示例
+2026-02-03 23:38:11 | DEBUG    | data_mining_agent.prompts.base:format:40 | 格式化提示词模板 'data_summary': 替换了 1 个变量
+2026-02-03 23:38:11 | DEBUG    | data_mining_agent.prompts.base:to_messages:113 | 添加用户消息: 提示词已格式化
+2026-02-03 23:38:11 | DEBUG    | data_mining_agent.prompts.base:to_messages:118 | 成功将提示词模板转换为 4 条消息
+2026-02-03 23:38:11 | DEBUG    | data_mining_agent.data_mining_agent:summarize_found_data:184 | 调用 LLM 进行数据概括
+2026-02-03 23:38:26 | DEBUG    | data_mining_agent.data_mining_agent:summarize_found_data:188 | LLM 响应长度: 284 字符
+2026-02-03 23:38:26 | DEBUG    | data_mining_agent.data_mining_agent:_extract_json_from_response:257 | 从文本中提取 JSON 对象: {
+    "summary": {
+        "total_laws": 0,
+        "total_articles": 0,
+        "law_fields": [],
+ ...
+2026-02-03 23:38:26 | INFO     | data_mining_agent.data_mining_agent:summarize_found_data:204 | ✅ 数据概括完成
+2026-02-03 23:38:26 | INFO     | forum.agent:conduct_debate:204 | 开始第 3 轮辩论
+2026-02-03 23:38:26 | INFO     | forum.agent:conduct_debate:234 | 引导数据分析智能体评估数据
+2026-02-03 23:38:26 | INFO     | forum.agent:conduct_debate:259 | 数据不满足要求，继续辩论
+2026-02-03 23:38:26 | INFO     | forum.agent:conduct_debate:204 | 开始第 4 轮辩论
+2026-02-03 23:38:26 | INFO     | forum.agent:conduct_debate:221 | 引导数据挖掘智能体搜索数据
+2026-02-03 23:38:26 | INFO     | data_mining_agent.data_mining_agent:search_laws_by_prompt:88 | 开始搜索法律条文，查询: 法律条文搜索...
+2026-02-03 23:38:26 | DEBUG    | data_mining_agent.prompts.base:to_messages:95 | 添加系统消息: 角色已定义
+2026-02-03 23:38:26 | DEBUG    | data_mining_agent.prompts.base:to_messages:102 | 添加 2 个 Few-shot 示例
+2026-02-03 23:38:26 | DEBUG    | data_mining_agent.prompts.base:format:40 | 格式化提示词模板 'law_search': 替换了 1 个变量
+2026-02-03 23:38:26 | DEBUG    | data_mining_agent.prompts.base:to_messages:113 | 添加用户消息: 提示词已格式化
+2026-02-03 23:38:26 | DEBUG    | data_mining_agent.prompts.base:to_messages:118 | 成功将提示词模板转换为 6 条消息
+2026-02-03 23:38:26 | DEBUG    | data_mining_agent.data_mining_agent:search_laws_by_prompt:100 | 调用 LLM 进行法律条文搜索
+2026-02-03 23:38:30 | DEBUG    | data_mining_agent.data_mining_agent:search_laws_by_prompt:104 | LLM 响应长度: 230 字符
+2026-02-03 23:38:30 | DEBUG    | data_mining_agent.data_mining_agent:_extract_json_from_response:257 | 从文本中提取 JSON 对象: {
+    "laws": [],
+    "total_count": 0,
+    "search_summary": "查询提示词'法律条文搜索'本身是一个元指令，用于说明搜索功能，而非一个具体...
+2026-02-03 23:38:30 | INFO     | data_mining_agent.data_mining_agent:search_laws_by_prompt:120 | ✅ 法律条文搜索完成，找到 0 条相关条文
+2026-02-03 23:38:30 | INFO     | data_mining_agent.data_mining_agent:summarize_found_data:169 | 开始生成数据概括性信息
+2026-02-03 23:38:30 | DEBUG    | data_mining_agent.prompts.base:to_messages:95 | 添加系统消息: 角色已定义
+2026-02-03 23:38:30 | DEBUG    | data_mining_agent.prompts.base:to_messages:102 | 添加 1 个 Few-shot 示例
+2026-02-03 23:38:30 | DEBUG    | data_mining_agent.prompts.base:format:40 | 格式化提示词模板 'data_summary': 替换了 1 个变量
+2026-02-03 23:38:30 | DEBUG    | data_mining_agent.prompts.base:to_messages:113 | 添加用户消息: 提示词已格式化
+2026-02-03 23:38:30 | DEBUG    | data_mining_agent.prompts.base:to_messages:118 | 成功将提示词模板转换为 4 条消息
+2026-02-03 23:38:30 | DEBUG    | data_mining_agent.data_mining_agent:summarize_found_data:184 | 调用 LLM 进行数据概括
+2026-02-03 23:38:42 | DEBUG    | data_mining_agent.data_mining_agent:summarize_found_data:188 | LLM 响应长度: 272 字符
+2026-02-03 23:38:42 | DEBUG    | data_mining_agent.data_mining_agent:_extract_json_from_response:257 | 从文本中提取 JSON 对象: {
+    "summary": {
+        "total_laws": 0,
+        "total_articles": 0,
+        "law_fields": [],
+ ...
+2026-02-03 23:38:42 | INFO     | data_mining_agent.data_mining_agent:summarize_found_data:204 | ✅ 数据概括完成
+2026-02-03 23:38:42 | INFO     | forum.agent:conduct_debate:204 | 开始第 5 轮辩论
+2026-02-03 23:38:42 | INFO     | forum.agent:conduct_debate:234 | 引导数据分析智能体评估数据
+2026-02-03 23:38:42 | INFO     | forum.agent:conduct_debate:259 | 数据不满足要求，继续辩论
+2026-02-03 23:38:42 | INFO     | forum.agent:conduct_debate:204 | 开始第 6 轮辩论
+2026-02-03 23:38:42 | INFO     | forum.agent:conduct_debate:221 | 引导数据挖掘智能体搜索数据
+2026-02-03 23:38:42 | INFO     | data_mining_agent.data_mining_agent:search_laws_by_prompt:88 | 开始搜索法律条文，查询: 法律条文搜索...
+2026-02-03 23:38:42 | DEBUG    | data_mining_agent.prompts.base:to_messages:95 | 添加系统消息: 角色已定义
+2026-02-03 23:38:42 | DEBUG    | data_mining_agent.prompts.base:to_messages:102 | 添加 2 个 Few-shot 示例
+2026-02-03 23:38:42 | DEBUG    | data_mining_agent.prompts.base:format:40 | 格式化提示词模板 'law_search': 替换了 1 个变量
+2026-02-03 23:38:42 | DEBUG    | data_mining_agent.prompts.base:to_messages:113 | 添加用户消息: 提示词已格式化
+2026-02-03 23:38:42 | DEBUG    | data_mining_agent.prompts.base:to_messages:118 | 成功将提示词模板转换为 6 条消息
+2026-02-03 23:38:42 | DEBUG    | data_mining_agent.data_mining_agent:search_laws_by_prompt:100 | 调用 LLM 进行法律条文搜索
+2026-02-03 23:38:46 | DEBUG    | data_mining_agent.data_mining_agent:search_laws_by_prompt:104 | LLM 响应长度: 180 字符
+2026-02-03 23:38:46 | DEBUG    | data_mining_agent.data_mining_agent:_extract_json_from_response:257 | 从文本中提取 JSON 对象: {
+    "laws": [],
+    "total_count": 0,
+    "search_summary": "查询提示词'法律条文搜索'本身是一个元指令，用于说明搜索方法或请求搜索，而...
+2026-02-03 23:38:46 | INFO     | data_mining_agent.data_mining_agent:search_laws_by_prompt:120 | ✅ 法律条文搜索完成，找到 0 条相关条文
+2026-02-03 23:38:46 | INFO     | data_mining_agent.data_mining_agent:summarize_found_data:169 | 开始生成数据概括性信息
+2026-02-03 23:38:46 | DEBUG    | data_mining_agent.prompts.base:to_messages:95 | 添加系统消息: 角色已定义
+2026-02-03 23:38:46 | DEBUG    | data_mining_agent.prompts.base:to_messages:102 | 添加 1 个 Few-shot 示例
+2026-02-03 23:38:46 | DEBUG    | data_mining_agent.prompts.base:format:40 | 格式化提示词模板 'data_summary': 替换了 1 个变量
+2026-02-03 23:38:46 | DEBUG    | data_mining_agent.prompts.base:to_messages:113 | 添加用户消息: 提示词已格式化
+2026-02-03 23:38:46 | DEBUG    | data_mining_agent.prompts.base:to_messages:118 | 成功将提示词模板转换为 4 条消息
+2026-02-03 23:38:46 | DEBUG    | data_mining_agent.data_mining_agent:summarize_found_data:184 | 调用 LLM 进行数据概括
+2026-02-03 23:38:57 | DEBUG    | data_mining_agent.data_mining_agent:summarize_found_data:188 | LLM 响应长度: 351 字符
+2026-02-03 23:38:57 | DEBUG    | data_mining_agent.data_mining_agent:_extract_json_from_response:230 | 从 ```json 代码块中提取 JSON: {
+    "summary": {
+        "total_laws": 0,
+        "total_articles": 0,
+        "law_fields": [],
+ ...
+2026-02-03 23:38:57 | INFO     | data_mining_agent.data_mining_agent:summarize_found_data:204 | ✅ 数据概括完成
+2026-02-03 23:38:57 | INFO     | forum.agent:conduct_debate:204 | 开始第 7 轮辩论
+2026-02-03 23:38:57 | INFO     | forum.agent:conduct_debate:234 | 引导数据分析智能体评估数据
+2026-02-03 23:38:57 | INFO     | forum.agent:conduct_debate:259 | 数据不满足要求，继续辩论
+2026-02-03 23:38:57 | INFO     | forum.agent:conduct_debate:204 | 开始第 8 轮辩论
+2026-02-03 23:38:57 | INFO     | forum.agent:conduct_debate:221 | 引导数据挖掘智能体搜索数据
+2026-02-03 23:38:57 | INFO     | data_mining_agent.data_mining_agent:search_laws_by_prompt:88 | 开始搜索法律条文，查询: 法律条文搜索...
+2026-02-03 23:38:57 | DEBUG    | data_mining_agent.prompts.base:to_messages:95 | 添加系统消息: 角色已定义
+2026-02-03 23:38:57 | DEBUG    | data_mining_agent.prompts.base:to_messages:102 | 添加 2 个 Few-shot 示例
+2026-02-03 23:38:57 | DEBUG    | data_mining_agent.prompts.base:format:40 | 格式化提示词模板 'law_search': 替换了 1 个变量
+2026-02-03 23:38:57 | DEBUG    | data_mining_agent.prompts.base:to_messages:113 | 添加用户消息: 提示词已格式化
+2026-02-03 23:38:57 | DEBUG    | data_mining_agent.prompts.base:to_messages:118 | 成功将提示词模板转换为 6 条消息
+2026-02-03 23:38:57 | DEBUG    | data_mining_agent.data_mining_agent:search_laws_by_prompt:100 | 调用 LLM 进行法律条文搜索
+2026-02-03 23:39:01 | DEBUG    | data_mining_agent.data_mining_agent:search_laws_by_prompt:104 | LLM 响应长度: 195 字符
+2026-02-03 23:39:01 | DEBUG    | data_mining_agent.data_mining_agent:_extract_json_from_response:257 | 从文本中提取 JSON 对象: {
+    "laws": [],
+    "total_count": 0,
+    "search_summary": "查询提示词'法律条文搜索'本身是一个元指令，用于说明搜索方法，而非一个具体...
+2026-02-03 23:39:01 | INFO     | data_mining_agent.data_mining_agent:search_laws_by_prompt:120 | ✅ 法律条文搜索完成，找到 0 条相关条文
+2026-02-03 23:39:01 | INFO     | data_mining_agent.data_mining_agent:summarize_found_data:169 | 开始生成数据概括性信息
+2026-02-03 23:39:01 | DEBUG    | data_mining_agent.prompts.base:to_messages:95 | 添加系统消息: 角色已定义
+2026-02-03 23:39:01 | DEBUG    | data_mining_agent.prompts.base:to_messages:102 | 添加 1 个 Few-shot 示例
+2026-02-03 23:39:01 | DEBUG    | data_mining_agent.prompts.base:format:40 | 格式化提示词模板 'data_summary': 替换了 1 个变量
+2026-02-03 23:39:01 | DEBUG    | data_mining_agent.prompts.base:to_messages:113 | 添加用户消息: 提示词已格式化
+2026-02-03 23:39:01 | DEBUG    | data_mining_agent.prompts.base:to_messages:118 | 成功将提示词模板转换为 4 条消息
+2026-02-03 23:39:01 | DEBUG    | data_mining_agent.data_mining_agent:summarize_found_data:184 | 调用 LLM 进行数据概括
+2026-02-03 23:39:13 | DEBUG    | data_mining_agent.data_mining_agent:summarize_found_data:188 | LLM 响应长度: 299 字符
+2026-02-03 23:39:13 | DEBUG    | data_mining_agent.data_mining_agent:_extract_json_from_response:257 | 从文本中提取 JSON 对象: {
+    "summary": {
+        "total_laws": 0,
+        "total_articles": 0,
+        "law_fields": [],
+ ...
+2026-02-03 23:39:13 | INFO     | data_mining_agent.data_mining_agent:summarize_found_data:204 | ✅ 数据概括完成
+2026-02-03 23:39:13 | INFO     | forum.agent:conduct_debate:204 | 开始第 9 轮辩论
+2026-02-03 23:39:13 | INFO     | forum.agent:conduct_debate:234 | 引导数据分析智能体评估数据
+2026-02-03 23:39:13 | INFO     | forum.agent:conduct_debate:259 | 数据不满足要求，继续辩论
+2026-02-03 23:39:13 | INFO     | forum.agent:conduct_debate:204 | 开始第 10 轮辩论
+2026-02-03 23:39:13 | INFO     | forum.agent:conduct_debate:221 | 引导数据挖掘智能体搜索数据
+2026-02-03 23:39:13 | INFO     | data_mining_agent.data_mining_agent:search_laws_by_prompt:88 | 开始搜索法律条文，查询: 法律条文搜索...
+2026-02-03 23:39:13 | DEBUG    | data_mining_agent.prompts.base:to_messages:95 | 添加系统消息: 角色已定义
+2026-02-03 23:39:13 | DEBUG    | data_mining_agent.prompts.base:to_messages:102 | 添加 2 个 Few-shot 示例
+2026-02-03 23:39:13 | DEBUG    | data_mining_agent.prompts.base:format:40 | 格式化提示词模板 'law_search': 替换了 1 个变量
+2026-02-03 23:39:13 | DEBUG    | data_mining_agent.prompts.base:to_messages:113 | 添加用户消息: 提示词已格式化
+2026-02-03 23:39:13 | DEBUG    | data_mining_agent.prompts.base:to_messages:118 | 成功将提示词模板转换为 6 条消息
+2026-02-03 23:39:13 | DEBUG    | data_mining_agent.data_mining_agent:search_laws_by_prompt:100 | 调用 LLM 进行法律条文搜索
+2026-02-03 23:39:17 | DEBUG    | data_mining_agent.data_mining_agent:search_laws_by_prompt:104 | LLM 响应长度: 194 字符
+2026-02-03 23:39:17 | DEBUG    | data_mining_agent.data_mining_agent:_extract_json_from_response:257 | 从文本中提取 JSON 对象: {
+    "laws": [],
+    "total_count": 0,
+    "search_summary": "查询提示词'法律条文搜索'本身是一个元指令，用于说明搜索方法或请求搜索，而...
+2026-02-03 23:39:17 | INFO     | data_mining_agent.data_mining_agent:search_laws_by_prompt:120 | ✅ 法律条文搜索完成，找到 0 条相关条文
+2026-02-03 23:39:17 | INFO     | data_mining_agent.data_mining_agent:summarize_found_data:169 | 开始生成数据概括性信息
+2026-02-03 23:39:17 | DEBUG    | data_mining_agent.prompts.base:to_messages:95 | 添加系统消息: 角色已定义
+2026-02-03 23:39:17 | DEBUG    | data_mining_agent.prompts.base:to_messages:102 | 添加 1 个 Few-shot 示例
+2026-02-03 23:39:17 | DEBUG    | data_mining_agent.prompts.base:format:40 | 格式化提示词模板 'data_summary': 替换了 1 个变量
+2026-02-03 23:39:17 | DEBUG    | data_mining_agent.prompts.base:to_messages:113 | 添加用户消息: 提示词已格式化
+2026-02-03 23:39:17 | DEBUG    | data_mining_agent.prompts.base:to_messages:118 | 成功将提示词模板转换为 4 条消息
+2026-02-03 23:39:17 | DEBUG    | data_mining_agent.data_mining_agent:summarize_found_data:184 | 调用 LLM 进行数据概括
+2026-02-03 23:39:31 | DEBUG    | data_mining_agent.data_mining_agent:summarize_found_data:188 | LLM 响应长度: 298 字符
+2026-02-03 23:39:31 | DEBUG    | data_mining_agent.data_mining_agent:_extract_json_from_response:257 | 从文本中提取 JSON 对象: {
+    "summary": {
+        "total_laws": 0,
+        "total_articles": 0,
+        "law_fields": [],
+ ...
+2026-02-03 23:39:31 | INFO     | data_mining_agent.data_mining_agent:summarize_found_data:204 | ✅ 数据概括完成
+2026-02-03 23:39:31 | INFO     | forum.agent:conduct_debate:262 | 辩论完成，生成最终报告
+2026-02-03 23:39:31 | INFO     | forum.agent:_generate_final_report:432 | 生成最终报告
+2026-02-03 23:39:31 | DEBUG    | forum.prompt.base:to_messages:95 | 添加系统消息: 角色已定义
+2026-02-03 23:39:31 | DEBUG    | forum.prompt.base:format:40 | 格式化提示词模板 'debate_summary': 替换了 4 个变量
+2026-02-03 23:39:31 | DEBUG    | forum.prompt.base:to_messages:113 | 添加用户消息: 提示词已格式化
+2026-02-03 23:39:31 | DEBUG    | forum.prompt.base:to_messages:118 | 成功将提示词模板转换为 2 条消息
+2026-02-03 23:40:06 | INFO     | __main__:_update_progress:602 | 正在生成报告...
+2026-02-03 23:40:06 | INFO     | report_agent.agent:generate_report:81 | 开始生成法律类案深度报告
+2026-02-03 23:40:06 | DEBUG    | report_agent.prompt.base:to_messages:95 | 添加系统消息: 角色已定义
+2026-02-03 23:40:06 | DEBUG    | report_agent.prompt.base:format:40 | 格式化提示词模板 'report_generation': 替换了 4 个变量
+2026-02-03 23:40:06 | DEBUG    | report_agent.prompt.base:to_messages:113 | 添加用户消息: 提示词已格式化
+2026-02-03 23:40:06 | DEBUG    | report_agent.prompt.base:to_messages:118 | 成功将提示词模板转换为 2 条消息
+2026-02-03 23:40:06 | DEBUG    | report_agent.agent:generate_report:112 | 调用 KIMI 推理模型生成报告
+2026-02-03 23:40:25 | WARNING  | report_agent.agent:generate_report:121 | 首次解析报告 JSON 失败，尝试自动修复后重试: Expecting property name enclosed in double quotes: line 29 column 25 (char 2205)
+2026-02-03 23:40:45 | ERROR    | report_agent.agent:generate_report:144 | 生成报告失败: Expecting ',' delimiter: line 29 column 24 (char 2204)
+2026-02-03 23:40:45 | INFO     | __main__:_update_progress:602 | 正在格式化报告...
+2026-02-03 23:40:45 | INFO     | __main__:_update_progress:602 | 报告生成完成！

@@ -1,5 +1,5 @@
 """
-KIMI 聊天模型的初始化工具。
+千问（Qwen）聊天模型的初始化工具。
 
 所有帮助函数都会通过 ``python-dotenv`` 读取 ``.env`` 中的配置，并写入
 ``langchain-openai`` 期望的环境变量，从而让外部代码直接调用
@@ -17,10 +17,10 @@ from langchain_openai import ChatOpenAI
 import os
 
 
-DEFAULT_CHAT_MODEL = "moonshot-v1-8k"
-DEFAULT_REASONING_MODEL = "moonshot-v1-32k"
-API_KEY_ENV = "KIMI_API_KEY"
-BASE_URL_ENV = "KIMI_BASE_URL"
+DEFAULT_CHAT_MODEL = "qwen-turbo"
+DEFAULT_REASONING_MODEL = "qwen-plus"
+API_KEY_ENV = "QWEN_API_KEY"
+BASE_URL_ENV = "QWEN_BASE_URL"
 
 
 def _prepare_environment(
@@ -30,8 +30,8 @@ def _prepare_environment(
     """
     从 ".env" 加载密钥与 Base URL,设置到 "langchain-openai" 所需的环境变量。
     
-    :param api_key_env: API 密钥的环境变量名，默认为 "KIMI_API_KEY"
-    :param base_url_env: Base URL 的环境变量名，默认为 "KIMI_BASE_URL"
+    :param api_key_env: API 密钥的环境变量名，默认为 "QWEN_API_KEY"
+    :param base_url_env: Base URL 的环境变量名，默认为 "QWEN_BASE_URL"
     :return: 包含 api_key 和 base_url 的字典
     :raises RuntimeError: 如果缺少必要的环境变量
     """
@@ -44,24 +44,6 @@ def _prepare_environment(
     base_url = os.getenv(base_url_env)
     if not base_url:
         raise RuntimeError(f"Missing base url env: {base_url_env}")
-    
-    # 确保 base_url 格式正确
-    # KIMI/Moonshot API: langchain-openai 会自动添加 /chat/completions
-    # 所以 BASE_URL 应该是: https://api.moonshot.cn/v1
-    base_url = base_url.rstrip('/')  # 移除末尾的斜杠
-    
-    # 如果 URL 已经包含 /v1/chat/completions，移除它（langchain 会自动添加）
-    if base_url.endswith('/v1/chat/completions'):
-        base_url = base_url[:-20]  # 移除 '/v1/chat/completions'
-    
-    # 确保 URL 以 /v1 结尾（langchain-openai 需要这个格式）
-    if not base_url.endswith('/v1'):
-        # 如果 URL 中没有 /v1，添加它
-        if '/v1' not in base_url:
-            base_url = f"{base_url}/v1"
-        # 如果 URL 以 /v1/ 结尾，移除末尾的斜杠
-        elif base_url.endswith('/v1/'):
-            base_url = base_url.rstrip('/')
 
     os.environ["OPENAI_API_KEY"] = api_key
     os.environ["OPENAI_BASE_URL"] = base_url
@@ -92,22 +74,22 @@ def _build_chat_model(
 @lru_cache(maxsize=2)
 def get_chat_model(
     *,
-    temperature: float = 0.2,
+    temperature: float = 0.3,
     model_name: str = DEFAULT_CHAT_MODEL,
     **kwargs: Any,
 ) -> ChatOpenAI:
     """
-    返回通用问答/报告生成场景使用的 KIMI 聊天模型，内部做了缓存，避免频繁重建。
+    返回通用问答/辩论场景使用的千问聊天模型，内部做了缓存，避免频繁重建。
     可通过参数覆盖模型名称、temperature 等解码配置。
     
-    :param temperature: 温度参数，默认 0.2（推荐用于报告生成）
-    :param model_name: 模型名称，默认为 "moonshot-v1-8k"
+    :param temperature: 温度参数，默认 0.3（推荐用于辩论主持）
+    :param model_name: 模型名称，默认为 "qwen-turbo"
     :param kwargs: 其他传递给 ChatOpenAI 的参数
     :return: ChatOpenAI 实例
     
     Example:
         >>> model = get_chat_model()
-        >>> response = model.invoke([{"role": "user", "content": "生成报告"}])
+        >>> response = model.invoke([{"role": "user", "content": "你好"}])
     """
     return _build_chat_model(model_name, temperature=temperature, **kwargs)
 
@@ -115,23 +97,23 @@ def get_chat_model(
 @lru_cache(maxsize=2)
 def get_reasoning_model(
     *,
-    temperature: float = 0.1,
+    temperature: float = 0.2,
     model_name: str = DEFAULT_REASONING_MODEL,
     **kwargs: Any,
 ) -> ChatOpenAI:
     """
-    返回适用于复杂推理/深度报告生成任务的 KIMI 推理模型，同样带缓存。
+    返回适用于复杂推理/辩论协调任务的千问推理模型，同样带缓存。
     
-    用于类案深度分析报告、复杂逻辑推理、多维度分析等需要长上下文的任务。
+    用于论坛辩论协调、智能体间沟通管理等需要复杂推理的任务。
     
-    :param temperature: 温度参数，默认 0.1（较低温度用于更稳定的推理）
-    :param model_name: 模型名称，默认为 "moonshot-v1-32k"（支持更长上下文）
+    :param temperature: 温度参数，默认 0.2（较低温度用于更稳定的推理）
+    :param model_name: 模型名称，默认为 "qwen-plus"
     :param kwargs: 其他传递给 ChatOpenAI 的参数
     :return: ChatOpenAI 实例
     
     Example:
         >>> model = get_reasoning_model()
-        >>> response = model.invoke([{"role": "user", "content": "生成深度分析报告"}])
+        >>> response = model.invoke([{"role": "user", "content": "协调两个智能体的辩论"}])
     """
     return _build_chat_model(model_name, temperature=temperature, **kwargs)
 
@@ -145,13 +127,13 @@ def get_model(
     """
     当调用方想显式指定任意模型名称时使用的通用工厂方法。
     
-    :param model_name: 模型名称（如：moonshot-v1-8k, moonshot-v1-32k, moonshot-v1-128k）
+    :param model_name: 模型名称
     :param temperature: 温度参数，默认 0.2
     :param kwargs: 其他传递给 ChatOpenAI 的参数
     :return: ChatOpenAI 实例
     
     Example:
-        >>> model = get_model("moonshot-v1-128k", temperature=0.3)
+        >>> model = get_model("qwen-turbo", temperature=0.3)
     """
     return _build_chat_model(model_name, temperature=temperature, **kwargs)
 

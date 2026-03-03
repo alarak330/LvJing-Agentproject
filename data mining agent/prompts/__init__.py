@@ -7,8 +7,16 @@
 from .database_query_prompts import (
     DATABASE_QUERY_STRATEGY_PROMPT,
 )
+from .law_search_prompts import (
+    LAW_SEARCH_PROMPT,
+)
+from .data_summary_prompts import (
+    DATA_SUMMARY_PROMPT,
+)
 
 __all__ = [
     "DATABASE_QUERY_STRATEGY_PROMPT",
+    "LAW_SEARCH_PROMPT",
+    "DATA_SUMMARY_PROMPT",
 ]
 

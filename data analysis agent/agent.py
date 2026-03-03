@@ -18,7 +18,7 @@ from loguru import logger
 from llm import get_chat_model, get_reasoning_model
 
 # 提示词模板
-from prompt import (
+from .prompt import (
     REQUIREMENT_PARSE_PROMPT,
     NL_REQUIREMENT_PARSE_PROMPT,
 )
@@ -58,6 +58,7 @@ class DataAnalysisAgent:
         :param temperature: LLM 温度参数，默认 0.2（推荐）
         """
         logger.info("初始化数据分析智能体")
+        self.name = "DataAnalysisAgent"
         self.chat_model = get_chat_model(
             model_name=chat_model_name,
             temperature=temperature

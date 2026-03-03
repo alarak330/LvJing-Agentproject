@@ -1,5 +1,5 @@
 """
-数据挖掘智能体主模块。
+报告智能体主模块。
 
 提供类案深度报告生成功能。
 """
@@ -11,7 +11,7 @@ from .llm import (
     DEFAULT_CHAT_MODEL,
     DEFAULT_REASONING_MODEL,
 )
-from .agent import DataMiningAgent
+from .agent import ReportAgent
 
 __all__ = [
     "get_chat_model",
@@ -19,5 +19,6 @@ __all__ = [
     "get_model",
     "DEFAULT_CHAT_MODEL",
     "DEFAULT_REASONING_MODEL",
-    "DataMiningAgent",
+    "ReportAgent",
 ]
+

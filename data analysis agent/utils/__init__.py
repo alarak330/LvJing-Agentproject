@@ -62,12 +62,6 @@ __all__ = [
     "parse_court_name",
     "parse_law_reference",
     "parse_date",
-    # 统计分析
-    "calculate_trend",
-    "calculate_distribution",
-    "calculate_win_rate",
-    "calculate_average_amount",
-    "group_by_dimension",
     # 数据格式化
     "format_case_summary",
     "format_statistics",

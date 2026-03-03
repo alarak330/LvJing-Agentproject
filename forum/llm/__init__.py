@@ -1,17 +1,18 @@
 """
-数据挖掘智能体主模块。
+论坛 LLM 模块。
 
-提供类案深度报告生成功能。
+提供千问大模型的初始化工具，用于论坛主持人功能。
 """
 
-from .llm import (
+from .qwenmodels import (
     get_chat_model,
     get_reasoning_model,
     get_model,
     DEFAULT_CHAT_MODEL,
     DEFAULT_REASONING_MODEL,
+    API_KEY_ENV,
+    BASE_URL_ENV,
 )
-from .agent import DataMiningAgent
 
 __all__ = [
     "get_chat_model",
@@ -19,5 +20,7 @@ __all__ = [
     "get_model",
     "DEFAULT_CHAT_MODEL",
     "DEFAULT_REASONING_MODEL",
-    "DataMiningAgent",
+    "API_KEY_ENV",
+    "BASE_URL_ENV",
 ]
+
