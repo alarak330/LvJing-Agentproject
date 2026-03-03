@@ -116,8 +116,7 @@ class DataMiningAgent:
                 raise ValueError("返回结果不是字典格式")
             if "laws" not in result:
                 raise ValueError("返回结果缺少 'laws' 字段")
-            
-            logger.info(f"✅ 法律条文搜索完成，找到 {result.get('total_count', len(result.get('laws', [])))} 条相关条文")
+
             return result
             
         except json.JSONDecodeError as e:
